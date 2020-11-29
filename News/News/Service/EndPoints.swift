@@ -15,4 +15,6 @@ struct EndPoints{
     static let everythingPath = "/v2/everything"
     static let apiKey = "7743a55e8be946269d4d97d8d66032bf"
     static let pageSize = "10"
+    static let country = "us"
+    static let language = "en"
 }

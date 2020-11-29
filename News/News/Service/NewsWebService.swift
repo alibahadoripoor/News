@@ -16,7 +16,6 @@ protocol NewsServiceProtocol: class {
 }
 
 final class NewsWebService: NewsServiceProtocol {
-    
     var dataService: DataServiceProtocol!
     
     init(dataService: DataServiceProtocol = DataService()) {
@@ -35,6 +34,7 @@ final class NewsWebService: NewsServiceProtocol {
         urlBuilder.queryItems = [
             URLQueryItem(name: "apiKey", value: EndPoints.apiKey),
             URLQueryItem(name: "pageSize", value: EndPoints.pageSize),
+            URLQueryItem(name: "country", value: EndPoints.country),
             URLQueryItem(name: "page", value: "\(page)"),
             URLQueryItem(name: "category", value: category.rawValue)
         ]
@@ -48,6 +48,7 @@ final class NewsWebService: NewsServiceProtocol {
         urlBuilder.queryItems = [
             URLQueryItem(name: "apiKey", value: EndPoints.apiKey),
             URLQueryItem(name: "pageSize", value: EndPoints.pageSize),
+            URLQueryItem(name: "language", value: EndPoints.language),
             URLQueryItem(name: "page", value: "\(page)"),
             URLQueryItem(name: "q", value: query)
         ]
@@ -74,51 +75,6 @@ final class NewsWebService: NewsServiceProtocol {
                 debugPrint("Unable to decode data: \(error.localizedDescription)")
                 completion(nil, .invalidData)
             }
-            
         }
     }
-    
-//    func getNews(with category: Category, page: Int, query: String? = nil, completion: @escaping ObjectCompletion) {
-//
-//        urlBuilder.queryItems = [
-//            URLQueryItem(name: "apiKey", value: EndPoints.apiKey),
-//            URLQueryItem(name: "pageSize", value: EndPoints.pageSize),
-//            URLQueryItem(name: "page", value: "\(page)"),
-//            URLQueryItem(name: "country", value: "us"),
-//            URLQueryItem(name: "category", value: category.rawValue)
-//        ]
-//
-//        if let query = query{
-//            let searchQueryItem = URLQueryItem(name: "q", value: query)
-//            urlBuilder.queryItems?.append(searchQueryItem)
-//        }
-//
-//        guard let url = urlBuilder.url else { return }
-//
-//        dataService.fetchData(for: url) { (data, err) in
-//
-//            guard err == nil else{
-//                completion(nil, err)
-//                return
-//            }
-//
-//            guard let data = data else {return}
-//
-//            do {
-//                let decoder = JSONDecoder()
-//                let object: Object = try decoder.decode(Object.self, from: data)
-//                completion(object, nil)
-//            } catch {
-//                debugPrint("Unable to decode data: \(error.localizedDescription)")
-//                completion(nil, .invalidData)
-//            }
-//
-//        }
-//
-//    }
-//
-//    func cancel(){
-//        dataService.cancel()
-//    }
-    
 }
